@@ -4,8 +4,13 @@
 
 # Constraint: exactly one solution exists
 
-class TwoSum:
-    nums:list
-    target:int
+def solution(input:list, target:int) -> list: 
+    findItem = target - input[0] 
+    otherItem = [i for i in range(len(input)) if input[i] == findItem ]
+    
+    return [findItem, otherItem]
 
-    def
+
+
+def main():
+    print(solution([2, 7, 11, 15],7))
