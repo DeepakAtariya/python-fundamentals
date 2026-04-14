@@ -163,23 +163,46 @@ logs = [
 
 #     print(f"Task 3 : {list(freq)[0]}")
 
-def main():
-    from collections import Counter, defaultdict
+# def main():
+#     from collections import Counter, defaultdict
  
-    freq = Counter([log["endpoint"] for log in logs])
-    print(f"Task 1 : {dict(freq)}")
+#     freq = Counter([log["endpoint"] for log in logs])
+#     print(f"Task 1 : {dict(freq)}")
 
-    grouped = defaultdict(list)
+#     grouped = defaultdict(list)
     
-    for log in logs:
-        grouped[log['status']].append(log)
+#     for log in logs:
+#         grouped[log['status']].append(log)
     
-    print(f"Task 2 : {dict(grouped)}")
+#     print(f"Task 2 : {dict(grouped)}")
 
-    print(f"Task 3 : {freq.most_common(1)[0][0]}")
+#     print(f"Task 3 : {freq.most_common(1)[0][0]}")
 
 
 
 # Task 1: Count how many times each endpoint was called
 # Task 2: Group logs by status code
 # Task 3: Find the most called endpoint
+
+
+# deque
+
+
+def main():
+    from collections import deque
+
+    queue = deque()
+
+    queue.append(1)
+    queue.append(1)
+    queue.append(2)
+
+    print(queue)
+    queue.append(5)
+    print(queue)
+    queue.appendleft(1)
+    print(queue)
+    queue.extendleft(queue)
+    print(queue)
+    queue.popleft()
+    print(queue)
