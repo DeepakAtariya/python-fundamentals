@@ -14,3 +14,16 @@ for token_id in tokens:
     print(f"  {token_id} -> '{enc.decode([token_id])}'")
     
 
+test_strings = [
+    "Hello world",
+    "hello world",
+    "HELLO WORLD",
+    "Héllo wörld",
+    "你好世界",
+    "नमस्ते दुनिया",
+]
+for s in test_strings:
+    tokens = enc.encode(s)
+    print(f"{s!r:30} -> {len(tokens)} tokens: {tokens}")
+    
+
