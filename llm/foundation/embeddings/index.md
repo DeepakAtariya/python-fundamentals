@@ -142,7 +142,7 @@ This is what powers:
 ## Why do we use standalone embeddings?
 
 ### Reason 1 : It doesn't scale
-Your friend's approach: "send the entire docs corpus to GPT-4."
+"send the entire docs corpus to GPT-4."
 What is "the entire docs corpus"? For most companies:
 
  - 10,000 internal docs
