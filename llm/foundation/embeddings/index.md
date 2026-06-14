@@ -192,3 +192,12 @@ Sending only the 5 most relevant chunks actually produces better answers than se
 If your docs change daily:
  - Naive approach: every query re-reads the full corpus → wastes everything
  - Embeddings approach: re-embed only the changed docs (incremental) → cheap
+
+### Reason 6: Your point — control
+You can choose chunking strategy, hybrid search (combine keyword + semantic), re-ranking, filtering by metadata (only docs from 2026, only engineering docs, etc.). You can't do any of this when "the LLM is the search engine."
+
+The mental model to lock in
+
+```Embeddings + vector search is the canonical pattern for "search over a corpus." Stuffing the corpus into the context window is almost never the right architecture.```
+
+This is the foundation of RAG, and in Month 3 we'll go deep on every piece later — chunking, vector DBs, hybrid search, re-ranking.
