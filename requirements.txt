@@ -1,0 +1,7 @@
+openai
+anthropic
+python-dotenv
+numpy
+tiktoken
+scikit-learn
+sentence-transformers

@@ -1,9 +1,14 @@
 import os
 import time
-from typing import Any, cast
+from typing import Optional
 
-from dotenv import load_dotenv  # type: ignore
+from dotenv import load_dotenv
 from openai import OpenAI
+from openai.types import CompletionUsage
+from openai.types.chat import (
+    ChatCompletionMessageParam,
+    ChatCompletionSystemMessageParam,
+)
 
 load_dotenv()
 
@@ -13,13 +18,13 @@ client = OpenAI(
     base_url="https://api.groq.com/openai/v1",
 )
 
-SYSTEM_MSG: dict[str, str] = {
+SYSTEM_MSG: ChatCompletionSystemMessageParam = {
     "role": "system",
     "content": "You are a helpful assistant and this is a CUI based interface. Please limit the output to 50 words.",
 }
 
 
-def clear_chat(history: list[dict[str, str]]) -> None:
+def clear_chat(history: list[ChatCompletionMessageParam]) -> None:
     if len(history) > 1:
         del history[1:]  # keep only the system prompt at index 0
 
@@ -36,7 +41,7 @@ def get_float_env(name: str, default: float = 0.0) -> float:
 
 
 def main() -> None:
-    chat_history: list[dict[str, str]] = [SYSTEM_MSG]
+    chat_history: list[ChatCompletionMessageParam] = [SYSTEM_MSG]
     session_tokens = 0
 
     print("Chat started. Type /reset or /exit.\n")
@@ -61,15 +66,15 @@ def main() -> None:
             # --- only real messages reach the history and the API ---
             chat_history.append({"role": "user", "content": user_question})
 
-            response: Any = client.chat.completions.create(
+            response = client.chat.completions.create(
                 model=os.environ.get("GROQ_MODEL", "openai/gpt-oss-120b"),
-                messages=cast(Any, chat_history),
+                messages=chat_history,
                 stream=True,
                 stream_options={"include_usage": True},
             )
             stream_delay = get_float_env("STREAM_DELAY", 0.02)
             reply = ""
-            usage = None
+            usage: Optional[CompletionUsage] = None
             for chunk in response:
                 if chunk.choices and chunk.choices[0].delta.content:
                     content = chunk.choices[0].delta.content

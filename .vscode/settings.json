@@ -1,5 +1,9 @@
 {
     "python-envs.defaultEnvManager": "ms-python.python:system",
     "python.analysis.typeCheckingMode": "strict",
-    "python.analysis.autoImportCompletions": false
+    "python.analysis.autoImportCompletions": true,
+    "python.defaultInterpreterPath": "/usr/bin/python3",
+    "python.analysis.extraPaths": [
+        "/Users/deepak/Library/Python/3.9/lib/python/site-packages"
+    ]
 }
